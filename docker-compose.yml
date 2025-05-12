@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+    app:
+        build:
+            context: .
+            dockerfile: docker/Dockerfile
+        container_name: todolist-app
+        ports:
+            - "8081:80"
+        volumes:
+            - .:/var/www/html
+        networks:
+            - todolist-network
+        depends_on:
+            - db
+        environment:
+            - APACHE_DOCUMENT_ROOT=/var/www/html/public
+
+    db:
+        image: mysql:8.0
+        container_name: todolist-db
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: todolist
+            MYSQL_USER: user
+            MYSQL_PASSWORD: password
+        volumes:
+            - db_data:/var/lib/mysql
+        networks:
+            - todolist-network
+        ports:
+            - "3308:3306"
+
+networks:
+    todolist-network:
+        driver: bridge
+
+volumes:
+    db_data:
