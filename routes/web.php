@@ -7,5 +7,5 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-   return "123";
+   return view('test');
 });
