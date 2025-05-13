@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'ToDo List')</title>
 
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -10,7 +11,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">ToDo List</a>
+        <a class="navbar-brand" href="{{ url('/') }}">{{ Lang::get('menu.to_do_list') }}</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>

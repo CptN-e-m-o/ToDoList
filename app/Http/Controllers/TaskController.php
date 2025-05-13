@@ -13,11 +13,6 @@ class TaskController extends Controller
         return view('tasks.index', compact('tasks'));
     }
 
-    public function create()
-    {
-        return view('tasks.create');
-    }
-
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -25,7 +20,14 @@ class TaskController extends Controller
             'description' => 'nullable|string',
         ]);
 
-        Auth::user()->tasks()->create($validated);
+        $task = Auth::user()->tasks()->create($validated);
+
+        if ($request->ajax()) {
+            return response()->json([
+                'message' => 'Задача добавлена',
+                'task' => $task
+            ]);
+        }
 
         return redirect()->route('tasks.index')->with('success', 'Задача добавлена');
     }

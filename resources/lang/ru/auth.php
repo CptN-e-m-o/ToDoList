@@ -8,6 +8,8 @@ return [
     'registration' => 'Регистрация',
     'email' => 'Email',
     'password' => 'Пароль',
+    'confirm_password' => 'Подтверждение пароля',
+    'register' => 'Зарегистрироваться',
     'login' => 'Войти',
     'name' => 'Имя',
 ];

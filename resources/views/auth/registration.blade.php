@@ -33,11 +33,11 @@
         </div>
 
         <div class="mb-3">
-            <label for="password_confirmation" class="form-label">Подтверждение пароля</label>
+            <label for="password_confirmation" class="form-label">{{ Lang::get('auth.confirm_password') }}</label>
             <input type="password" name="password_confirmation" id="password_confirmation" class="form-control"
                    required>
         </div>
 
-        <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+        <button type="submit" class="btn btn-primary">{{ Lang::get('auth.register') }}</button>
     </form>
 @endsection

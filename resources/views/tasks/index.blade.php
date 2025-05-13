@@ -7,7 +7,7 @@
 
     @if ($errors->any())
         <div class="alert alert-danger">
-            <strong>Ошибка:</strong>
+            <strong>{{ Lang::get('tasks.error') }}</strong>
             <ul class="mb-0 mt-2">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -49,8 +49,8 @@
                             </td>
                             <td>{{ $task->created_at->format('d.m.Y H:i') }}</td>
                             <td>
-                                <button type="submit" class="btn btn-success btn-sm">Сохранить</button>
-                                <a href="{{ route('tasks.index') }}" class="btn btn-secondary btn-sm">Отмена</a>
+                                <button type="submit" class="btn btn-success btn-sm">{{ Lang::get('tasks.save') }}</button>
+                                <a href="{{ route('tasks.index') }}" class="btn btn-secondary btn-sm">{{ Lang::get('tasks.cancel') }}</a>
                             </td>
                         </form>
                     </tr>
@@ -61,11 +61,11 @@
                         <td>{{ $task->description }}</td>
                         <td>{{ $task->created_at->format('d.m.Y H:i') }}</td>
                         <td>
-                            <a href="{{ route('tasks.index', ['edit' => $task->id]) }}" class="btn btn-sm btn-warning">Редактировать</a>
-                            <form action="#" method="POST" class="d-inline">
+                            <a href="{{ route('tasks.index', ['edit' => $task->id]) }}" class="btn btn-sm btn-warning">{{ Lang::get('tasks.edit') }}</a>
+                            <form action="{{ route('tasks.destroy', $task) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-sm btn-danger" onclick="return confirm('Удалить задачу?')">Удалить</button>
+                                <button class="btn btn-sm btn-danger" onclick="return confirm('Удалить задачу?')">{{ Lang::get('tasks.delete') }}</button>
                             </form>
                         </td>
                     </tr>
@@ -84,7 +84,7 @@
                     </td>
                     <td>—</td>
                     <td>
-                        <button type="submit" class="btn btn-success btn-sm">Добавить</button>
+                        <button type="submit" class="btn btn-success btn-sm">{{ Lang::get('tasks.add') }}</button>
                     </td>
                 </form>
             </tr>
