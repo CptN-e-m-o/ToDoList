@@ -78,7 +78,7 @@
                             <form action="{{ route('tasks.destroy', $task) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-sm btn-danger" onclick="return confirm('Удалить задачу?')">{{ Lang::get('tasks.delete') }}</button>
+                                <button class="btn btn-sm btn-danger" onclick={{ Lang::get('tasks.delete_task') }}>{{ Lang::get('tasks.delete') }}</button>
                             </form>
                         </td>
                     </tr>
@@ -91,10 +91,10 @@
                     <td>#</td>
                     <td></td>
                     <td>
-                        <input type="text" name="title" class="form-control" placeholder="Введите название" required value="{{ old('title') }}">
+                        <input type="text" name="title" class="form-control" placeholder={{ Lang::get('tasks.add_name') }} required value="{{ old('title') }}">
                     </td>
                     <td>
-                        <input type="text" name="description" class="form-control" placeholder="Введите описание" value="{{ old('description') }}">
+                        <input type="text" name="description" class="form-control" placeholder={{ Lang::get('tasks.add_description') }} value="{{ old('description') }}">
                     </td>
                     <td>—</td>
                     <td>
