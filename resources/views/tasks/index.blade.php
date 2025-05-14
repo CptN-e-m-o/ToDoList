@@ -16,9 +16,6 @@
         </div>
     @endif
 
-    @php
-        $editId = request('edit');
-    @endphp
 
     <div class="table-responsive">
         <table class="table table-bordered align-middle text-center">
@@ -34,7 +31,7 @@
             </thead>
             <tbody>
             @foreach($tasks as $index => $task)
-                @if($editId == $task->id)
+                @if(request('edit') == $task->id)
                     <form action="{{ route('tasks.update', $task) }}" method="POST">
                         @csrf
                         @method('PUT')
