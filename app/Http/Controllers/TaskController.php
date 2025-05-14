@@ -5,35 +5,27 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StoreTaskRequest;
+use App\Http\Requests\UpdateTaskRequest;
 
 class TaskController extends Controller
 {
     public function index() {
         $tasks = Auth::user()->tasks()->get();
-        return view('tasks.index', compact('tasks'));
+        return view('tasks.index', ['tasks' => $tasks]);
     }
 
-    public function store(Request $request)
+    public function store(StoreTaskRequest $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:100',
-            'description' => 'nullable|string',
-            'is_done' => 'nullable|boolean',
-        ]);
-
-        $task = Auth::user()->tasks()->create($validated);
+        $task = Auth::user()->tasks()->create($request->validated());
 
         return redirect()->route('tasks.index')->with('success', 'Задача добавлена');
     }
 
-    public function update(Request $request, Task $task)
+    public function update(UpdateTaskRequest $request, Task $task)
     {
 
-        $validated = $request->validate([
-            'title' => 'required|string|max:100',
-            'description' => 'nullable|string',
-        ]);
-        $task->update($validated);
+        $task->update($request->validated());
 
         return redirect()->route('tasks.index')->with('success', 'Задача обновлена');
     }

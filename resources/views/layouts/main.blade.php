@@ -11,7 +11,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">{{ Lang::get('menu.to_do_list') }}</a>
+        <a class="navbar-brand" href="{{ url('/') }}">{{ __('menu.to_do_list') }}</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -20,20 +20,20 @@
             <ul class="navbar-nav ms-auto">
                 @auth
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('tasks.index') }}">{{ Lang::get('menu.my_tasks') }}</a>
+                        <a class="nav-link" href="{{ route('tasks.index') }}">{{ __('menu.my_tasks') }}</a>
                     </li>
                     <li class="nav-item">
                         <form action="{{ route('logout') }}" method="POST" class="d-inline">
                             @csrf
-                            <button type="submit" class="btn btn-link nav-link">{{ Lang::get('menu.logout') }}</button>
+                            <button type="submit" class="btn btn-link nav-link">{{ __('menu.logout') }}</button>
                         </form>
                     </li>
                 @else
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login.form') }}">{{ Lang::get('menu.authorization') }}</a>
+                        <a class="nav-link" href="{{ route('login.form') }}">{{ __('menu.authorization') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register.form') }}">{{ Lang::get('menu.registration') }}</a>
+                        <a class="nav-link" href="{{ route('register.form') }}">{{ __('menu.registration') }}</a>
                     </li>
                 @endauth
             </ul>

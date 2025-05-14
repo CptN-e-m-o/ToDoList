@@ -1,13 +1,13 @@
 @extends('layouts.main')
 
-@section('title', Lang::get('tasks.my_tasks'))
+@section('title', __('tasks.my_tasks'))
 
 @section('content')
-    <h2 class="mb-4">{{ Lang::get('tasks.my_tasks') }}</h2>
+    <h2 class="mb-4">{{ __('tasks.my_tasks') }}</h2>
 
     @if ($errors->any())
         <div class="alert alert-danger">
-            <strong>{{ Lang::get('tasks.error') }}</strong>
+            <strong>{{ __('tasks.error') }}</strong>
             <ul class="mb-0 mt-2">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -21,12 +21,12 @@
         <table class="table table-bordered align-middle text-center">
             <thead class="table-dark">
             <tr>
-                <th>{{ Lang::get('tasks.number') }}</th>
-                <th>{{ Lang::get('tasks.status') }}</th>
-                <th>{{ Lang::get('tasks.name') }}</th>
-                <th>{{ Lang::get('tasks.description') }}</th>
-                <th>{{ Lang::get('tasks.created_at') }}</th>
-                <th>{{ Lang::get('tasks.actions') }}</th>
+                <th>{{ __('tasks.number') }}</th>
+                <th>{{ __('tasks.status') }}</th>
+                <th>{{ __('tasks.name') }}</th>
+                <th>{{ __('tasks.description') }}</th>
+                <th>{{ __('tasks.created_at') }}</th>
+                <th>{{ __('tasks.actions') }}</th>
             </tr>
             </thead>
             <tbody>
@@ -71,11 +71,11 @@
                         <td>{{ $task->description }}</td>
                         <td>{{ $task->created_at->format('d.m.Y H:i') }}</td>
                         <td>
-                            <a href="{{ route('tasks.index', ['edit' => $task->id]) }}" class="btn btn-sm btn-warning">{{ Lang::get('tasks.edit') }}</a>
+                            <a href="{{ route('tasks.index', ['edit' => $task->id]) }}" class="btn btn-sm btn-warning">{{ __('tasks.edit') }}</a>
                             <form action="{{ route('tasks.destroy', $task) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-sm btn-danger" onclick={{ Lang::get('tasks.delete_task') }}>{{ Lang::get('tasks.delete') }}</button>
+                                <button class="btn btn-sm btn-danger" onclick={{ __('tasks.delete_task') }}>{{ __('tasks.delete') }}</button>
                             </form>
                         </td>
                     </tr>
@@ -88,14 +88,14 @@
                     <td>#</td>
                     <td></td>
                     <td>
-                        <input type="text" name="title" class="form-control" placeholder={{ Lang::get('tasks.add_name') }} required value="{{ old('title') }}">
+                        <input type="text" name="title" class="form-control" placeholder={{ __('tasks.add_name') }} required value="{{ old('title') }}">
                     </td>
                     <td>
-                        <input type="text" name="description" class="form-control" placeholder={{ Lang::get('tasks.add_description') }} value="{{ old('description') }}">
+                        <input type="text" name="description" class="form-control" placeholder={{ __('tasks.add_description') }} value="{{ old('description') }}">
                     </td>
                     <td>—</td>
                     <td>
-                        <button type="submit" class="btn btn-success btn-sm">{{ Lang::get('tasks.add') }}</button>
+                        <button type="submit" class="btn btn-success btn-sm">{{ __('tasks.add') }}</button>
                     </td>
                 </form>
             </tr>
