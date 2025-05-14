@@ -6,22 +6,12 @@ RUN apt-get update && apt-get install -y \
     unzip \
     zip \
     ca-certificates \
-    default-mysql-client
+    default-mysql-client \
+    && docker-php-ext-install pdo pdo_mysql
 
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y nodejs \
-    && npm install -g npm
-
-RUN docker-php-ext-install pdo pdo_mysql
+COPY docker/apache/000-default.conf /etc/apache2/sites-available/000-default.conf
 
 RUN a2enmod rewrite
-
-RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|' /etc/apache2/sites-available/000-default.conf
-
-RUN echo "<Directory /var/www/html/public>\n\
-    AllowOverride All\n\
-    Require all granted\n\
-</Directory>" >> /etc/apache2/apache2.conf
 
 COPY . /var/www/html
 

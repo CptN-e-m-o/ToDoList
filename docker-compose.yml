@@ -10,8 +10,6 @@ services:
             - "8081:80"
         volumes:
             - .:/var/www/html
-        networks:
-            - todolist-network
         depends_on:
             - db
         environment:
@@ -21,20 +19,14 @@ services:
         image: mysql:8.0
         container_name: todolist-db
         environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: todolist
-            MYSQL_USER: user
-            MYSQL_PASSWORD: password
+            MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
+            MYSQL_DATABASE: "${DB_DATABASE}"
+            MYSQL_USER: "${DB_USERNAME}"
+            MYSQL_PASSWORD: "${DB_PASSWORD}"
         volumes:
             - db_data:/var/lib/mysql
-        networks:
-            - todolist-network
         ports:
             - "3308:3306"
-
-networks:
-    todolist-network:
-        driver: bridge
 
 volumes:
     db_data:
