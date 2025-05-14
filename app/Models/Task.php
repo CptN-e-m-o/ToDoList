@@ -13,6 +13,10 @@ class Task extends Model
         'title',
         'description',
         'user_id',
+        'is_done',
+    ];
+    protected $casts = [
+        'is_done' => 'boolean',
     ];
 
     public function user()

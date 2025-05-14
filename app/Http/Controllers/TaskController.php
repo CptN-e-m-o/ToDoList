@@ -18,16 +18,10 @@ class TaskController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:100',
             'description' => 'nullable|string',
+            'is_done' => 'nullable|boolean',
         ]);
 
         $task = Auth::user()->tasks()->create($validated);
-
-        if ($request->ajax()) {
-            return response()->json([
-                'message' => 'Задача добавлена',
-                'task' => $task
-            ]);
-        }
 
         return redirect()->route('tasks.index')->with('success', 'Задача добавлена');
     }
@@ -39,7 +33,6 @@ class TaskController extends Controller
             'title' => 'required|string|max:100',
             'description' => 'nullable|string',
         ]);
-
         $task->update($validated);
 
         return redirect()->route('tasks.index')->with('success', 'Задача обновлена');
@@ -52,4 +45,11 @@ class TaskController extends Controller
         return redirect()->route('tasks.index')->with('success', 'Задача удалена');
     }
 
+    public function toggle(Task $task)
+    {
+        $task->is_done = !$task->is_done;
+        $task->save();
+
+        return redirect()->back()->with('success', 'Статус задачи обновлён');
+    }
 }
